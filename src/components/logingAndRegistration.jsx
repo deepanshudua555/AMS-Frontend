@@ -3,7 +3,6 @@ import Login from "./login";
 import Register from "./register";
 
 
-
 export default function LoginAndRegistration () {
     const [showRegister, setShowRegister] = useState(false);
     
@@ -14,7 +13,7 @@ export default function LoginAndRegistration () {
 
     function handleRegisterButton () {
         setShowRegister(true);
-    console.log("handle register button")
+        console.log("handle register button")
     }
     
     return (
@@ -33,13 +32,12 @@ export default function LoginAndRegistration () {
                 (
                     <div className="flex flex-col">
                         <div className="flex justify-center items-center mt-10">
-                            <button className="bg-blue-400 hover:bg-blue-500 text-white font-semibold py-2 px-4 border rounded-full" onClick={handleLoginButton}>Login</button>
+                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 border rounded-full" onClick={handleLoginButton}>Login</button>
                             <button className="cursor-default bg-transparent text-gray-800 font-bold py-2 px-4 border-b-2 border-gray-800 pb-2 mx-2">Register</button>
                         </div>
                         <Register />
                     </div>
                 )
-
             }
         </div>
     )

@@ -1,11 +1,11 @@
 export default function Login(props) {
   return (
     <>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <div className="mt-10 flex min-h-full flex-1 flex-col justify-center px-6 py-20 lg:px-8 border-2 border-blue-500/50 w-[600px] mx-auto shadow-xl rounded-md">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" action="#" method="POST">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-900">
                 Email address
               </label>
               <div className="mt-2">
