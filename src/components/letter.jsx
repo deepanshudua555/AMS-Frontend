@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import './letter.css';
-
+import { useContext } from "react";
+import leaveContext from "../Context/leaveContext";
 const Letter = () => {
+    const contextData = useContext(leaveContext);
+    const{addLeaveAppln} = contextData;
+
     const [isEditable, setIsEditable] = useState(false);
     const [data, setData] = useState({
         from: "",
-        to: "",
+        till: "",
         subject: "",
         days: "",
         startDate: "",
@@ -18,8 +22,8 @@ const Letter = () => {
     };
 
     const handleSendButton = () => {
-        const jsonData = JSON.stringify(data);
-        console.log(jsonData);
+        // const jsonData = JSON.stringify(data);
+        addLeaveAppln(data);
     };
 
     const handleChange = (event) => {
