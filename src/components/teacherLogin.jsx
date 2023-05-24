@@ -1,9 +1,36 @@
+import { useState } from "react";
+import axios from 'axios'
 export default function Login(props) {
+  const [creds, setCreds] = useState({email:"",password:""});
+
+
+  const handleOnChange = (e)=>{
+    setCreds({...creds,[e.target.name]:e.target.value})
+  }
+  const handleSubmit = async (event)=>{
+    event.preventDefault();
+    const {
+     email , password
+    } = creds
+    const body = {
+      email ,password
+    }
+    console.log(body);
+    var res = await axios.post('http://localhost:5000/api/auth/teacher/login', body);
+    res = res.data;
+    if(!res.token){
+      console.log("No token Found");
+    }
+    else{
+      console.log(res.token);
+      localStorage.setItem('token',res.token);
+    }
+  }
   return (
     <>
       <div className="mt-10 flex min-h-full flex-1 flex-col justify-center px-6 py-20 lg:px-8 border-2 border-blue-500/50 w-[600px] mx-auto shadow-xl rounded-md">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-900">
                 Email address
@@ -14,6 +41,8 @@ export default function Login(props) {
                   name="email"
                   type="email"
                   autoComplete="email"
+                  value={creds.email}
+                  onChange={handleOnChange}
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                 />
@@ -38,6 +67,8 @@ export default function Login(props) {
                   type="password"
                   autoComplete="current-password"
                   required
+                  value={creds.password}
+                  onChange={handleOnChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                 />
               </div>
