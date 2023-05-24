@@ -1,6 +1,6 @@
 import { useState } from "react"
-import Login from "./login";
-import Register from "./register";
+import StundentLogin from "./stundentLogin";
+import StudentRegister from "./studentRegister";
 
 
 export default function LoginAndRegistration () {
@@ -25,7 +25,7 @@ export default function LoginAndRegistration () {
                             <button className="cursor-default bg-transparent text-gray-800 font-bold py-2 px-4 border-b-2 border-gray-800 pb-2 mx-2">Login</button>
                             <button className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 border rounded-full" onClick={handleRegisterButton}>Register</button>
                         </div>
-                        <Login />
+                        <StundentLogin />
                     </div>
                 ) 
                 :
@@ -35,7 +35,7 @@ export default function LoginAndRegistration () {
                             <button className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 border rounded-full" onClick={handleLoginButton}>Login</button>
                             <button className="cursor-default bg-transparent text-gray-800 font-bold py-2 px-4 border-b-2 border-gray-800 pb-2 mx-2">Register</button>
                         </div>
-                        <Register />
+                        <StudentRegister />
                     </div>
                 )
             }

@@ -47,11 +47,12 @@ export default function Register(props) {
     } else {
       setPasswordError("Password is invalid");
     }
-    if (validateConfirmPassword(confirmPassword)) {
-
-    } else {
+    if (!validateConfirmPassword(confirmPassword)) {
       setConfirmPasswordError("Confirm password doesn't match")
-    }
+    } 
+    // else {
+      
+    // }
   }
   return (
     <>
