@@ -1,61 +1,38 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import './App.css'
-import Header from './components/header'
-import LoginAndRegistration from './components/logingAndRegistration';
-import Letter from './components/letter';
+import Navbar from './components/Navbar'
+import StudentLoginAndRegistration from './components/studentLoginAndRegistration';
+import TeacherLoginAndRegistration from './components/teacherLoginAndRegistration';
 import Timetable from './components/timetable';
 import Notices from './components/Notices';
-
+import LeaveState from './Context/leaveState';
+import Leave from './components/leaveApplication'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  // Link
+} from "react-router-dom";
 function App() {
-  const [lsButton, setShowLogin] = useState(false);
-  const [leaveButton, setShowLeave] = useState(false);
-  const [attendanceButton, setShowAttendance] = useState(false);
-  const [timetableButton, setShowTimetable] = useState(false);
 
-
-  function handleLeaveButtonClick () {
-    setShowLeave(true);
-    setShowAttendance(false);
-    setShowTimetable(false);
-    setShowLogin(false);
-  }
-  
-  function handleAttendanceButtonClick () {
-    setShowLeave(false);
-    setShowAttendance(true);
-    setShowTimetable(false);
-    setShowLogin(false);
-  }
-  
-  function handleTimetableButtonClick () {
-    setShowLeave(false);
-    setShowAttendance(false);
-    setShowTimetable(true);
-    setShowLogin(false);
-  }
-  
-  function handleLoginButtonClick () {
-    setShowLeave(false);
-    setShowAttendance(false);
-    setShowTimetable(false);
-    setShowLogin(true);
-  }
-  
   return (
     <>
-      <Header 
-        lsButton={lsButton}  onLoginButtonClick={handleLoginButtonClick} 
-        leaveButton={leaveButton} onLeaveButtonClick={handleLeaveButtonClick} 
-        attendanceButton={attendanceButton} onAttendanceButtonClick={handleAttendanceButtonClick}
-        timetableButton={timetableButton} onTimetableButtonClick={handleTimetableButtonClick} 
-      />
-      {(!lsButton && !leaveButton && !attendanceButton && !timetableButton)? <Notices /> : null}
-      {(lsButton && !leaveButton && !attendanceButton && !timetableButton)? <LoginAndRegistration /> : null}
-      {(!lsButton && leaveButton && !attendanceButton && !timetableButton)? <Letter /> : null}
-      {(!lsButton && !leaveButton && attendanceButton && !timetableButton)? <LoginAndRegistration /> : null}
-      {(!lsButton && !leaveButton && !attendanceButton && timetableButton)? <Timetable /> : null}
+      <LeaveState>
+        <Router>
+          <Navbar />
+          {/* {alert && <Alert/>} */}
+          <Routes>
+          <Route path="/" element={<Notices />} />
+            <Route path="/studentcreds" element={<StudentLoginAndRegistration />} />
+            <Route path="/teachercreds" element={<TeacherLoginAndRegistration />} />
+            <Route path="/leave" element={<Leave />} />
+            <Route path="/timetable" element={<Timetable />} />
+          </Routes>
+        </Router>
+
+      </LeaveState>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
