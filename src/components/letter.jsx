@@ -10,6 +10,7 @@ const Letter = () => {
     const [isEditable, setIsEditable] = useState(false);
     const [data, setData] = useState({
         from: "",
+        to:"",
         till: "",
         subject: "",
         days: "",
