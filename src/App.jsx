@@ -7,6 +7,8 @@ import Timetable from './components/timetable';
 import Notices from './components/notices';
 import LeaveState from './Context/leaveState';
 import Leave from './components/leaveApplication'
+import ActiveLeaves from './components/activeLeaves';
+import Letter from './components/letter';
 import {
   BrowserRouter as Router,
   Routes,
@@ -22,11 +24,13 @@ function App() {
           <Navbar />
           {/* {alert && <Alert/>} */}
           <Routes>
-          <Route path="/" element={<Notices />} />
+            <Route path="/" element={<Notices />} />
             <Route path="/studentcreds" element={<StudentLoginAndRegistration />} />
             <Route path="/teachercreds" element={<TeacherLoginAndRegistration />} />
             <Route path="/leave" element={<Leave />} />
             <Route path="/timetable" element={<Timetable />} />
+            <Route path="/leave/activeleaves" element={<ActiveLeaves />} />
+            <Route path="/leave/letter" element={<Letter />} />
           </Routes>
         </Router>
 
