@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import './letter.css';
 import { useContext } from "react";
 import leaveContext from "../Context/leaveContext";
+
 const Letter = () => {
     const contextData = useContext(leaveContext);
     const{addLeaveAppln} = contextData;
@@ -22,8 +23,14 @@ const Letter = () => {
     };
 
     const handleSendButton = () => {
-        // const jsonData = JSON.stringify(data);
-        addLeaveAppln(data);
+        // const jsonData = JSON.stringify(data);i
+        console.log(data.subject.length)
+        console.log(data.reason.length)
+        if ((data.subject.length > 5) && (data.reason.length > 11)) {
+            addLeaveAppln(data);
+        } else {
+            alert("not enough content")
+        }
     };
 
     const handleChange = (event) => {
