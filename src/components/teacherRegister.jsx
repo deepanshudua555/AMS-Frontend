@@ -55,10 +55,10 @@ export default function Register(props) {
 
       else {
         const {
-          firstName, lastName , t_id , mobNo ,  department , email ,
+          firstName, lastName , t_id , mobNo ,  department , email , designation
         } = creds
         const body = {
-          firstName, lastName , t_id , mobNo , department  , email ,password
+          firstName, lastName , t_id , mobNo , department  , email ,password, designation:"hod"
         }
         console.log(body);
         var res = await axios.post('http://localhost:5000/api/auth/teacher/createuser', body);
