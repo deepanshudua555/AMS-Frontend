@@ -7,12 +7,13 @@ export default function LeaveState({ children }) {
 
     const addLeaveAppln = async (leaveAppln) => {
                 
-            localStorage.setItem('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ1MmIxZWQ2NmUyMDVhNjhlMzVlMWU5In0sImlhdCI6MTY4MzE0MTEwMX0.1HIU3Z0CjEgp2tmwuosEDlO319XJXIPMVEo-t8HSkng')
+        
+            // localStorage.setItem('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ1MmIxZWQ2NmUyMDVhNjhlMzVlMWU5In0sImlhdCI6MTY4MzE0MTEwMX0.1HIU3Z0CjEgp2tmwuosEDlO319XJXIPMVEo-t8HSkng')
 
         const body = {
+            from:leaveAppln.from,
             sub:leaveAppln.subject,
             desc:leaveAppln.reason,
-            t_id:34243242,
             startDate:leaveAppln.startDate,
             endDate:leaveAppln.endDate,
         }
@@ -25,6 +26,11 @@ export default function LeaveState({ children }) {
                     "auth-token": localStorage.getItem('token')
                 }
             })
+        if(response.status!=200)
+        {
+            console.log("permission denied")
+        }
+        else
         console.log("Note added");
     }
     return (
