@@ -4,7 +4,7 @@ import Navbar from './components/Navbar'
 import StudentLoginAndRegistration from './components/studentLoginAndRegistration';
 import TeacherLoginAndRegistration from './components/teacherLoginAndRegistration';
 import Timetable from './components/timetable';
-import Notices from './components/Notices';
+import Notices from './components/notices';
 import LeaveState from './Context/leaveState';
 import Leave from './components/leaveApplication'
 import {
