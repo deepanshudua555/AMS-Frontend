@@ -15,13 +15,28 @@ import {
   Route,
   // Link
 } from "react-router-dom";
+import Cards from './components/logincards';
 function App() {
+  const [isLoggedInStud, setStudLogin] = useState(false);
+  const [isLoggedInTeach, setTeachLogin] = useState(false);
+  
+  function handleStudentButtonClick() {
+    setStudLogin(true);
+    setTeachLogin(false);
+    console.log("student was clicked")
+  }
+  function handleTeacherButtonClick() {
+    setStudLogin(false);
+    setTeachLogin(true);
+    console.log("teacher was clicked")
+  }
 
   return (
     <>
       <LeaveState>
         <Router>
-          <Navbar />
+          <Navbar isLoggedInStud={isLoggedInStud} isLoggedInTeach={isLoggedInTeach}/>
+          {!isLoggedInStud && !isLoggedInTeach && <Cards onStudButtonClick={handleStudentButtonClick} onTeachButtonClick={handleTeacherButtonClick}/>}
           {/* {alert && <Alert/>} */}
           <Routes>
             <Route path="/" element={<Notices />} />
