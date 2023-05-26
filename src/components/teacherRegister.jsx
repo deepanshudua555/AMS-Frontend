@@ -69,6 +69,7 @@ export default function Register(props) {
         else{
           console.log(res.token);
           localStorage.setItem('token',res.token);
+          localStorage.setItem('user','teacher');
         }
       }
     } else {
