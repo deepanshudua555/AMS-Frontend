@@ -1,6 +1,20 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+
 export default function Navbar(props) {
+  // localStorage.clear();
+
+  const navigate = useNavigate();
+  const token = localStorage.getItem('token');
+  const user = localStorage.getItem('user');
+  
+  const handleLogout = ()=>{
+    localStorage.clear();
+    navigate('/');
+  }
+
+
+
   const buttonInactive =
     'bg-blue-500 hover:bg-white text-white hover:text-gray-800 py-2 px-2 border-2 hover:border-black rounded-full w-32'
   const buttonActive =
@@ -21,14 +35,16 @@ export default function Navbar(props) {
           </a>
 
             <ul className="flex ml-auto w-1/2 justify-evenly items-center border">
-              <li>
+            
+              <li className={`${token===null?'hidden':''}`}>
                 <Link to="/">
+                
                     <button className={props.leaveButton ? buttonActive : buttonInactive}>
                 Home</button>
                 </Link>
               </li>
               
-                <li>
+                <li className={`${token===null || user==='student'?'hidden':''}`}>
                 <Link to="/leave"><button className={props.leaveButton ? buttonActive : buttonInactive}>                
                   Leave</button></Link>
                 </li>
@@ -37,7 +53,7 @@ export default function Navbar(props) {
                             <Link to='/attendance' >Attendance</Link>
                         </li> */}
 
-              <li>
+              <li className={`${token===null?'hidden':''}`}>
             <Link to="/timetable"><button className={
                   props.timetableButton ? buttonActive : buttonInactive
                 }
@@ -45,12 +61,23 @@ export default function Navbar(props) {
                 Time-Table
               </button></Link>
               </li>
-              <li className={props.lsButton ? buttonActive : buttonInactive}>
+              
+              {/* className={props.lsButton ? buttonActive : buttonInactive} */}
+              {/* <li className={`${token===null?'hidden':''}`}>
                 <Link to="/studentcreds">Student Login/Register</Link>
-              </li>
-              <li className={props.lsButton ? buttonActive : buttonInactive}>
+              </li> */}
+              {/* className={props.lsButton ? buttonActive : buttonInactive} */}
+              {/* <li className={`${token===null?'hidden':''}`}>
                 <Link to="/teachercreds">Teacher Login/Register</Link>
-              </li>
+              </li> */}
+
+
+              {/* logout button  */}
+              <li className={`${token===null?'hidden':''}`}>
+                <button onClick={handleLogout} className={props.leaveButton ? buttonActive : buttonInactive}>                
+                  Logout
+                  </button>
+                </li>
             </ul>
 
         </div>
