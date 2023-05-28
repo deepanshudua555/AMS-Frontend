@@ -33,6 +33,7 @@ export default function Navbar(props) {
           </a>
 
           <ul className="flex ml-auto w-1/2 justify-evenly items-center">
+            {/*  className={`${token === null ? 'hidden' : ''}`}*/}
             <li className={`${token === null ? 'hidden' : ''}`}>
               <Link to="/">
                 <button
@@ -43,11 +44,7 @@ export default function Navbar(props) {
               </Link>
             </li>
 
-            <li
-              className={`${
-                token === null || user === 'student' ? 'hidden' : ''
-              }`}
-            >
+            <li className={`${token === null ? 'hidden' : ''}`}>
               <Link to="/leave">
                 <button
                   className={props.leaveButton ? buttonActive : buttonInactive}
