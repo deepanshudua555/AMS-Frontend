@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from 'axios'
+import { useNavigate } from "react-router-dom";
 export default function Login(props) {
+  const navigate = useNavigate();
   const [creds, setCreds] = useState({email:"",password:""});
 
 
@@ -24,6 +26,8 @@ export default function Login(props) {
     else{
       console.log(res.token);
       localStorage.setItem('token',res.token);
+      localStorage.setItem('user','teacher');
+      navigate('/leave');
     }
   }
   return (

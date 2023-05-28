@@ -1,4 +1,16 @@
-
 .content {
-    font-family: 'Handlee', cursive;
+  font-family: 'Handlee', cursive;
 }
+
+.letter {
+  width: 700px;
+  height: 780px;
+}
+
+.letterback {
+  width: 700px;
+  height: 780px;
+}
+
+/*calendar
+date month (jan MMM), year (YYYY)*/

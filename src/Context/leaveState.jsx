@@ -1,10 +1,12 @@
 import leaveContext from "./leaveContext";
 import axios from 'axios';
+import { useState } from "react";
 // import React from 'react'
 
 export default function LeaveState({ children }) {
 
-
+    const [teacher, setTeacher] = useState(false)
+    const [student, setStudent] = useState(false);
     const addLeaveAppln = async (leaveAppln) => {
                 
         
@@ -34,7 +36,7 @@ export default function LeaveState({ children }) {
         console.log("Note added");
     }
     return (
-        <leaveContext.Provider value={{addLeaveAppln}}>
+        <leaveContext.Provider value={{addLeaveAppln,teacher,setTeacher,student,setStudent}}>
             {children}
         </leaveContext.Provider>
     )

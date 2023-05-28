@@ -24,6 +24,7 @@ export default function Login(props) {
     else{
       console.log(res.token);
       localStorage.setItem('token',res.token);
+      localStorage.setItem('user','student');
     }
   }
   return (
