@@ -7,7 +7,12 @@ export default function Navbar(props) {
   const navigate = useNavigate()
   const token = localStorage.getItem('token')
   const user = localStorage.getItem('user')
-
+  let userName;
+  if(user!==null){
+    userName = JSON.parse(localStorage.getItem('userData')).firstName;
+    userName = userName.charAt(0).toUpperCase();
+  }
+  
   const handleLogout = () => {
     localStorage.clear()
     navigate('/')
@@ -43,8 +48,17 @@ export default function Navbar(props) {
                 </button>
               </Link>
             </li>
+            <li className={`${(token === null || user === 'student') ? 'hidden' : ''}`}>
+              <Link to="/dashboard">
+                <button
+                  className={props.leaveButton ? buttonActive : buttonInactive}
+                >
+                  Dashboard
+                </button>
+              </Link>
+            </li>
 
-            <li className={`${token === null ? 'hidden' : ''}`}>
+            <li className={`${(token === null || user === 'student') ? 'hidden' : ''}`}>
               <Link to="/leave">
                 <button
                   className={props.leaveButton ? buttonActive : buttonInactive}
@@ -85,7 +99,9 @@ export default function Navbar(props) {
                 onClick={handleLogout}
                 className={props.leaveButton ? buttonActive : buttonInactive}
               >
-                Logout
+                {
+                  (userName===null?'':userName)
+                }
               </button>
             </li>
           </ul>

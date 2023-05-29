@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 export default function Register(props) {
 
-
-  const [creds, setCreds] = useState({firstName:"",lastName:"",enrollmentNo:"",mobNo:"",classs:"",section:"",email:""});
+  const navigate = useNavigate();
+  const [creds, setCreds] = useState({ firstName: "", lastName: "", enrollmentNo: "", mobNo: "", classs: "", section: "", email: "" });
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
   function handleOnChange(e) {
-    setCreds({ ...creds,[e.target.name]: e.target.value});
+    setCreds({ ...creds, [e.target.name]: e.target.value });
   }
 
   function handlePasswordChange(event) {
@@ -55,21 +56,22 @@ export default function Register(props) {
 
       else {
         const {
-          firstName, lastName , enrollmentNo , mobNo , classs , section , email ,
+          firstName, lastName, enrollmentNo, mobNo, classs, section, email,
         } = creds
         const body = {
-          firstName, lastName , enrollmentNo , mobNo , classs , section , email ,password
+          firstName, lastName, enrollmentNo, mobNo, classs, section, email, password
         }
         console.log(body);
         var res = await axios.post('http://localhost:5000/api/auth/student/createuser', body);
         res = res.data;
-        if(!res.token){
+        if (!res.token) {
           console.log("No token Found");
         }
-        else{
+        else {
           console.log(res.token);
-          localStorage.setItem('token',res.token);
-      localStorage.setItem('user','student');
+          localStorage.setItem('token', res.token);
+          localStorage.setItem('user', 'student');
+          navigate('/');
 
         }
       }

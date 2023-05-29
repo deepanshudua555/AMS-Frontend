@@ -9,6 +9,7 @@ export default function Login(props) {
   const handleOnChange = (e)=>{
     setCreds({...creds,[e.target.name]:e.target.value})
   }
+
   const handleSubmit = async (event)=>{
     event.preventDefault();
     const {
@@ -24,10 +25,11 @@ export default function Login(props) {
       console.log("No token Found");
     }
     else{
-      console.log(res.token);
+      console.log(res.message);
       localStorage.setItem('token',res.token);
       localStorage.setItem('user','teacher');
-      navigate('/leave');
+      localStorage.setItem('userData',JSON.stringify(res.user));
+      navigate('/dashboard');
     }
   }
   return (
