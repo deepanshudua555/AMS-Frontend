@@ -9,17 +9,23 @@ import Bar from './activeLeavesBar';
 
 export default function ActiveLeaves({name}) {
     const [leaves,setLeaves]=useState([]);
+    const [show,setShow]=useState(true);
     // let leaves;
     const getLeaves=async(event)=>{
-        // event.preventDefault();
-        const token=localStorage.getItem('token')
         let objectleaves=await axios.get('http://localhost:5000/api/leaveapplication/checkleaves',{
             headers:{
                 "auth-token": localStorage.getItem('token')
             }
         })
-        setLeaves(objectleaves.data);
-        console.log(leaves);
+        let  access =objectleaves.data.access 
+        console.log(objectleaves.data.access);
+        if(access===false){
+            setShow(false);
+        }
+        else{
+            setLeaves(objectleaves.data);
+        }
+        // console.log(leaves);
 
     }
     useEffect(()=>{
@@ -29,9 +35,13 @@ export default function ActiveLeaves({name}) {
         <div>
 
             {
-                leaves.map((leave)=>{
+                show? 
+               ( leaves.map((leave)=>{
                  return  <Bar key={leave._id} name={leave.name}/>
                 })
+               )
+               :
+               (<div>You cant access this data</div>)
             }
 
         </div>  

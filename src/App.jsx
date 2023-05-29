@@ -7,10 +7,11 @@ import Timetable from './components/timetable'
 import Notices from './components/notices'
 import LeaveState from './Context/leaveState'
 import Leave from './components/leaveApplication'
-import ActiveLeaves from './components/activeLeaves'
-import Letter from './components/letter'
-import { useContext } from 'react'
-import leaveContext from './Context/leaveContext'
+// import ActiveLeaves from './components/activeLeaves'
+// import Letter from './components/letter'
+// import { useContext } from 'react'
+// import leaveContext from './Context/leaveContext'
+import Dashboard from './components/dashboard'
 import {
   BrowserRouter as Router,
   Routes,
@@ -42,8 +43,9 @@ function App() {
             />
             <Route path="/leave" element={<Leave />} />
             <Route path="/timetable" element={<Timetable />} />
-            {/* <Route path="/leave/activeleaves" element={<ActiveLeaves />} />
-            <Route path="/leave/letter" element={<Letter />} /> */}
+            <Route path="/dashboard" element={<Dashboard />} />
+
+            
           </Routes>
         </Router>
       </LeaveState>

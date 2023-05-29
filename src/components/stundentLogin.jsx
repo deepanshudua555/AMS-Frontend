@@ -1,8 +1,9 @@
 import { useState } from "react";
 import axios from 'axios'
+import { useNavigate } from "react-router-dom";
 export default function Login(props) {
   const [creds, setCreds] = useState({email:"",password:""});
-
+  const navigate = useNavigate();
 
   const handleOnChange = (e)=>{
     setCreds({...creds,[e.target.name]:e.target.value})
@@ -25,6 +26,7 @@ export default function Login(props) {
       console.log(res.token);
       localStorage.setItem('token',res.token);
       localStorage.setItem('user','student');
+      navigate('/');
     }
   }
   return (
