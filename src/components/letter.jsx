@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
 import './letter.css'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 import { useContext } from 'react'
 import leaveContext from '../Context/leaveContext'
 
 const Letter = () => {
   const contextData = useContext(leaveContext)
   const { addLeaveAppln } = contextData
+  const [selectedFromDate, setSelectedFromDate] = useState(null)
+  const [selectedToDate, setSelectedToDate] = useState(null)
 
   const [isEditable, setIsEditable] = useState(false)
   const [data, setData] = useState({
@@ -75,34 +79,36 @@ const Letter = () => {
             </p>
             <p>Dear Sir/Madam,</p>
             <br />
-            <p className="leading-">
-              I am writing this letter to inform you that I will be taking leave
-              from work for
-              <input
-                type="text"
-                name="days"
-                value={data.days}
-                onChange={handleChange}
-                className="border-t-0 border-l-0 border-r-0 border-b-1 px-2 py-0 w-7 bg-transparent"
-              />
-              days, starting from
-              <input
-                type="text"
-                name="startDate"
-                value={data.startDate}
-                onChange={handleChange}
-                className="border-t-0 border-l-0 border-r-0 border-b-1 px-2 py-0 w-24 bg-transparent"
-              />
-              to
-              <input
-                type="text"
-                name="endDate"
-                value={data.endDate}
-                onChange={handleChange}
-                className="border-t-0 border-l-0 border-r-0 border-b-1 px-2 py-0 w-24 bg-transparent"
-              />
-              .
-            </p>
+            <div className="flex">
+              <p className="leading-">
+                I am writing this letter to inform you that I will be taking
+                leave from work for
+                <input
+                  type="text"
+                  name="days"
+                  value={data.days}
+                  onChange={handleChange}
+                  className="border-t-0 border-l-0 border-r-0 border-b-1 px-2 py-0 w-7 bg-transparent"
+                />
+                days, starting from
+                <DatePicker
+                  selected={selectedFromDate}
+                  onChange={(date) => setSelectedFromDate(date)}
+                  dateFormat="dd/MM/yyyy"
+                  placeholderText="From Date"
+                  className="inline-flex bg-transparent w-24 p-0 border-t-0 border-l-0 border-r-0 m-0 text-center"
+                />
+                to
+                <DatePicker
+                  selected={selectedToDate}
+                  onChange={(date) => setSelectedToDate(date)}
+                  dateFormat="dd/MM/yyyy"
+                  placeholderText="To Date"
+                  className="datepicker-input align-middle bg-transparent w-24 p-0 border-t-0 border-l-0 border-r-0 m-0 text-center"
+                />
+                .
+              </p>
+            </div>
             <br />
             <p>
               The reason for my leave is {''}

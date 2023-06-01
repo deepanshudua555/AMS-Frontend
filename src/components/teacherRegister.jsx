@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 export default function Register(props) {
 
-  const [creds, setCreds] = useState({firstName:"",lastName:"",t_id:"",mobNo:"",email:"",department:[]});
+  const [creds, setCreds] = useState({ firstName: "", lastName: "", t_id: "", mobNo: "", email: "", department: [] });
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
+
+  const navigate = useNavigate();
   
   function handleOnChange(e) {
-    setCreds({ ...creds,[e.target.name]: e.target.value});
+    setCreds({ ...creds, [e.target.name]: e.target.value });
   }
-  
+
   function handlePasswordChange(event) {
     const value = event.target.value;
     setPassword(value);
@@ -23,13 +26,13 @@ export default function Register(props) {
   }
 
   function handleConfirmPasswordChange(event) {
-      const value = event.target.value;
-      setConfirmPassword(value);
-      if (!validateConfirmPassword(value)) {
-        setConfirmPasswordError("Password doesn't match");
-      } else {
-        setConfirmPasswordError("");
-      }
+    const value = event.target.value;
+    setConfirmPassword(value);
+    if (!validateConfirmPassword(value)) {
+      setConfirmPasswordError("Password doesn't match");
+    } else {
+      setConfirmPasswordError("");
+    }
   }
 
   function validatePassword(password) {
@@ -45,7 +48,7 @@ export default function Register(props) {
     }
   }
 
-  const handleSubmit = async (event)=> {
+  const handleSubmit = async (event) => {
 
     event.preventDefault();
     if (validatePassword(password)) {
@@ -55,21 +58,22 @@ export default function Register(props) {
 
       else {
         const {
-          firstName, lastName , t_id , mobNo ,  department , email , designation
+          firstName, lastName, t_id, mobNo, department, email, designation
         } = creds
         const body = {
-          firstName, lastName , t_id , mobNo , department  , email ,password, designation:"hod"
+          firstName, lastName, t_id, mobNo, department, email, password, designation: "hod"
         }
         console.log(body);
         var res = await axios.post('http://localhost:5000/api/auth/teacher/createuser', body);
         res = res.data;
-        if(!res.token){
+        if (!res.token) {
           console.log("No token Found");
         }
-        else{
+        else {
           console.log(res.token);
-          localStorage.setItem('token',res.token);
-          localStorage.setItem('user','teacher');
+          localStorage.setItem('token', res.token);
+          localStorage.setItem('user', 'teacher');
+          navigate('/');
         }
       }
     } else {
@@ -154,7 +158,7 @@ export default function Register(props) {
               </div>
             </div>
 
-            
+
             <div>
               <label htmlFor="department" className="block text-sm font-medium leading-6 text-gray-900">
                 Department
@@ -165,6 +169,24 @@ export default function Register(props) {
                   name="department"
                   type="value"
                   autoComplete="department"
+                  // value={creds.department}
+                  onChange={handleOnChange}
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="designation" className="block text-sm font-medium leading-6 text-gray-900">
+                Designation
+              </label>
+              <div className="mt-2">
+                <input
+                  id="designation"
+                  name="designation"
+                  type="value"
+                  autoComplete="designation"
                   // value={creds.department}
                   onChange={handleOnChange}
                   required

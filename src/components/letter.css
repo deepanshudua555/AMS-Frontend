@@ -12,5 +12,9 @@
   height: 780px;
 }
 
+.datepicker-input {
+  display: inline-block;
+  vertical-align: middle;
+}
 /*calendar
 date month (jan MMM), year (YYYY)*/

@@ -3,7 +3,7 @@ import Letter from './letter'
 // import ActiveLeaves from "./activeLeaves";
 import ActiveLeaves from './activeLeaves'
 import { useState } from 'react'
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
+
 
 export default function LeaveApplication() {
   const [active, setActive] = useState(false)
@@ -19,7 +19,6 @@ export default function LeaveApplication() {
       <div>
         <ul className="flex justify-evenly w-1/2 mx-auto">
           <button onClick={handleActive}>
-            {/* <Link to="/leave/activeleaves"> */}
             <li
               className={`  ${
                 active === true ? 'bg-sky-600' : ''
