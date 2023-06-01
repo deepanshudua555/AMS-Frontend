@@ -247,7 +247,7 @@ export default function Navbar(props) {
               </div>
               <hr className="border border-gray-500 w-full my-2" />
               {menu.map((item, i) => (
-                <Link
+                <Link key='321432'
                   to={item.label == 'Logout' ? '' : item.page}
                   className="w-full"
                 >
