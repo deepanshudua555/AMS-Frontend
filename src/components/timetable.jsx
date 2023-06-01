@@ -1,6 +1,35 @@
-import React, { useState } from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 
 const Timetable = () => {
+
+  const [data,setData]=useState([])
+
+  const getTimeTable=async(event)=>{
+    const user=JSON.parse(localStorage.getItem('userData'))
+    console.log(user.classs,user.section,user.year)
+    const tt=await axios.get('http://localhost:5000/api/timetable',
+    {
+      params:{
+      "classs":user.classs,
+      "section":user.section,
+      "year":user.year
+      }
+    },
+    {
+      headers:{
+        "auth-token": localStorage.getItem('token')
+      }
+    })
+    console.log(tt.data.days.mon)
+    setData(tt.data.days)//timetable is here
+  }
+
+
+  useEffect(()=>{
+    getTimeTable();
+  },[])
+
   const days = [
     'Monday',
     'Tuesday',
@@ -22,6 +51,10 @@ const Timetable = () => {
     '16:10',
     '17:00',
   ]
+
+  // const periods=[
+  //   1,2,3,4,5,6,7,8,9
+  // ]
 
   const breakColBorder = (time, day) => {
     let border = 'border border-gray-500'
@@ -57,6 +90,10 @@ const Timetable = () => {
     setSelectedSectOpt(event.target.value)
   }
 
+  const tt={
+
+  }
+
   return (
     <div className="flex flex-col items-center">
       <table className="border-collapse border border-gray-500 mx-auto m-24 w-3/4 h-96">
@@ -79,11 +116,18 @@ const Timetable = () => {
               <td className="border border-gray-500 text-center font-semibold w-40">
                 {day}
               </td>
-              {times.map((time) => (
+              {
+                times.map((time,p) => (
                 <td
                   key={`${day}-${time}`}
                   className={breakColBorder(time, day)}
-                ></td>
+                >
+                  
+                  {/* {${data.${day}}.map((d)=>{
+                    {p}
+                  })} */}
+                  
+                </td>
               ))}
             </tr>
           ))}

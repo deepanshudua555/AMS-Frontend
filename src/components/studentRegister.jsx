@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Register(props) {
 
   const navigate = useNavigate();
-  const [creds, setCreds] = useState({ firstName: "", lastName: "", enrollmentNo: "", mobNo: "", classs: "", section: "", email: "" });
+  const [creds, setCreds] = useState({ firstName: "", lastName: "", enrollmentNo: "", mobNo: "", classs: "", section: "", email: "" ,year: ""});
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -56,10 +56,10 @@ export default function Register(props) {
 
       else {
         const {
-          firstName, lastName, enrollmentNo, mobNo, classs, section, email,
+          firstName, lastName, enrollmentNo, mobNo, classs, section, email,year,
         } = creds
         const body = {
-          firstName, lastName, enrollmentNo, mobNo, classs, section, email, password
+          firstName, lastName, enrollmentNo, mobNo, classs, section, email, password,year,
         }
         console.log(body);
         var res = await axios.post('http://localhost:5000/api/auth/student/createuser', body);
@@ -71,6 +71,8 @@ export default function Register(props) {
           console.log(res.token);
           localStorage.setItem('token', res.token);
           localStorage.setItem('user', 'student');
+          localStorage.setItem('userData',JSON.stringify(res.user));
+
           navigate('/');
 
         }
@@ -194,6 +196,24 @@ export default function Register(props) {
             </div>
 
             <div>
+              <label htmlFor="year" className="block text-sm font-medium leading-6 text-gray-900">
+                Passout Year
+              </label>
+              <div className="mt-2">
+                <input
+                  id="year"
+                  name="year"
+                  type="value"
+                  autoComplete="year"
+                  // value={creds.year}
+                  onChange={handleOnChange}
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Email address
               </label>
@@ -211,6 +231,7 @@ export default function Register(props) {
               </div>
             </div>
 
+            
             <div>
               <div className="flex items-center justify-between">
                 <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
