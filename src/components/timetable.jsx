@@ -1,14 +1,54 @@
-import React, { useState } from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 
 const Timetable = () => {
+  // let timeTable;
+  const [data, setData] = useState([])
+  useEffect(() => {
+    getTimeTable();
+  }, [])
+
+  // const [tueTimeTable, setTueTimeTable] = useState([])
+  // const [wedTimeTable, setWedTimeTable] = useState([])
+  // const [thuTimeTable, setThuTimeTable] = useState([])
+  // const [friTimeTable, setFriTimeTable] = useState([])
+
+  const getTimeTable = async (event) => {
+    const user = JSON.parse(localStorage.getItem('userData'))
+    const tt = await axios.get('http://localhost:5000/api/timetable',
+      {
+        params: {
+          "classs": user.classs,
+          "section": user.section,
+          "year": user.year
+        }
+      },
+      {
+        headers: {
+          "auth-token": localStorage.getItem('token')
+        }
+      })
+    //adding time table here
+    setData(data => [...data, tt.data.days.mon])//timetable is here
+    setData(data => [...data, tt.data.days.tue])
+    setData(data => [...data, tt.data.days.wed])
+    setData(data => [...data, tt.data.days.thu])
+    setData(data => [...data, tt.data.days.fri])
+    // setData(data=>[...data,tt.data.days.sat])
+
+  }
+
+  // console.log(timeTable);
+
+
   const days = [
     'Monday',
     'Tuesday',
     'Wednesday',
     'Thursday',
     'Friday',
-    'Saturday',
-    'Sunday',
+    // 'Saturday',
+    //   'Sunday',
   ]
   const times = [
     '9:30',
@@ -22,6 +62,10 @@ const Timetable = () => {
     '16:10',
     '17:00',
   ]
+
+  // const periods=[
+  //   1,2,3,4,5,6,7,8,9
+  // ]
 
   const breakColBorder = (time, day) => {
     let border = 'border border-gray-500'
@@ -58,12 +102,16 @@ const Timetable = () => {
   }
 
   return (
+
+
     <div className="flex flex-col items-center">
+
       <table className="border-collapse border border-gray-500 mx-auto m-24 w-3/4 h-96">
         <thead>
           <tr>
             <th className="border border-gray-500"></th>
             {times.map((time) => (
+
               <th
                 key={time}
                 className="border border-gray-500 text-center font-semibold w-32"
@@ -74,19 +122,49 @@ const Timetable = () => {
           </tr>
         </thead>
         <tbody>
-          {days.map((day) => (
-            <tr key={day} className={rowStyle(day)}>
-              <td className="border border-gray-500 text-center font-semibold w-40">
-                {day}
-              </td>
-              {times.map((time) => (
-                <td
-                  key={`${day}-${time}`}
-                  className={breakColBorder(time, day)}
-                ></td>
-              ))}
-            </tr>
-          ))}
+          {/* {days.map((day,dayIdx) => (
+  
+              <tr key={day} className={rowStyle(day)}>
+                <td className="border border-gray-500 text-center font-semibold w-40">
+                  {day}
+                </td>
+               
+                {
+                  times.map((time, p) => (
+                    <td
+                      key={`${day}-${time}`}
+                      className={breakColBorder(time, day)}
+                    >
+                    </td>
+                  ))}
+              </tr>
+  
+            ))} */}
+            
+            {
+        data.map((periods,pidx) => (
+          
+          <tr key={days[pidx]} className={rowStyle(days[pidx])}>
+                <td className="border border-gray-500 text-center font-semibold w-40">
+                  {days[pidx]}
+                </td>
+               
+                {
+                   periods.map((period) => (
+                    <td
+                    key={`${days[pidx]}-${times[pidx]}`}
+                    className={breakColBorder(times[pidx], days[pidx])}
+                  >
+                    {period}
+                  </td>
+                  ))
+               }
+              </tr>
+  
+
+         
+        ))
+      }
         </tbody>
       </table>
       <div className="flex w-96 justify-between">
@@ -118,6 +196,9 @@ const Timetable = () => {
       </div>
     </div>
   )
+
+
 }
 
 export default Timetable
+

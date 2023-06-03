@@ -16,7 +16,7 @@ export default function Cards(props) {
       <Link to="/studentcreds">
         <button
           onClick={props.onStudButtonClick}
-          className="flex flex-col bg-blue-200 hover:bg-blue-300  shadow-xl border-2 border-black rounded-md h-60 w-52 items-center justify-center"
+          className="flex flex-col bg-blue-200 hover:bg-blue-300 shadow-xl border-2 border-black rounded-md h-60 w-52 items-center justify-center"
         >
           <img src="/studentCard.png" alt="Student" className="w-32" />
           <span className="my-10">Student</span>

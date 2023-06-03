@@ -240,7 +240,7 @@ export default function Navbar(props) {
           </button>
 
           {dropDown && (
-            <div className="border border-black bg-blue-300 flex flex-col absolute top-28 right-10 items-start rounded-lg p-2 w-52">
+            <div className="border border-black bg-blue-300 flex flex-col absolute top-28 right-10 items-start rounded-lg p-2 w-52 z-50">
               <div className="text-sm">
                 {userName === null ? '' : userName} <br />
                 {email === null ? '' : email}
@@ -248,6 +248,7 @@ export default function Navbar(props) {
               <hr className="border border-gray-500 w-full my-2" />
               {menu.map((item, i) => (
                 <Link
+                  key="321432"
                   to={item.label == 'Logout' ? '' : item.page}
                   className="w-full"
                 >
