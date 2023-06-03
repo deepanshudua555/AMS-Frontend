@@ -4,7 +4,7 @@ import Navbar from './components/navbar'
 import StudentLoginAndRegistration from './components/studentLoginAndRegistration'
 import TeacherLoginAndRegistration from './components/teacherLoginAndRegistration'
 import Timetable from './components/timetable'
-import Notices from './components/notices'
+import Home from './components/home'
 import LeaveState from './Context/leaveState'
 import Leave from './components/leaveApplication'
 import Dashboard from './components/dashboard'
@@ -20,7 +20,7 @@ function App() {
         <Router>
           <Navbar />
           <Routes>
-            <Route path="/" element={<Notices />} />
+            <Route path="/" element={<Home />} />
             <Route
               path="/studentcreds"
               element={<StudentLoginAndRegistration />}
